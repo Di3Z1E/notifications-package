@@ -1,5 +1,5 @@
 # toast_notification/__init__.py
-
+import re
 import tkinter as tk
 import tkinter.font as tkfont
 
@@ -18,6 +18,12 @@ def validate_font(font):
         return False
 
 
+def is_valid_color(color):
+    """Checks if the provided string is a valid hex color code."""
+    color_regex = r"^#[0-9A-Fa-f]{6}$"
+    return re.match(color_regex, color) is not None
+
+
 def show_toast(title="Missing Title", message="Missing Message", duration=2, color="#424242", position="bottom-right",
                icon=None, font=None):
     """
@@ -33,6 +39,13 @@ def show_toast(title="Missing Title", message="Missing Message", duration=2, col
         icon (str): The path to the icon image file (default is None).
         font (str): The font name for the title and message labels (default is None).
     """
+
+    if len(title) > 24:
+        raise ValueError("Title length too long")
+
+    if not is_valid_color(color):
+        raise ValueError("Invalid color format. Use #RRGGBB format.")
+
     root = tk.Tk()
     root.title(title)
 
