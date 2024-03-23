@@ -46,6 +46,9 @@ def show_toast(title="Missing Title", message="Missing Message", duration=2, col
     if not is_valid_color(color):
         raise ValueError("Invalid color format. Use #RRGGBB format.")
 
+    if len(message) > 120:
+        raise ValueError("Notification message is too long, 120 characters allowed.")
+
     root = tk.Tk()
     root.title(title)
 
