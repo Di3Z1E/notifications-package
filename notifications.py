@@ -1,4 +1,3 @@
-# toast_notification/__init__.py
 import re
 import tkinter as tk
 import tkinter.font as tkfont
